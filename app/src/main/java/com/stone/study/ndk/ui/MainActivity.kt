@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.stone.study.ndk.R
 import com.stone.study.ndk.base.SampleAdapter
 import com.stone.study.ndk.databinding.ActivityMainBinding
+import com.stone.study.ndk.ui.encrypt.EncryptActivity
 import com.stone.study.ndk.ui.jni.JniActivity
 import com.stone.study.ndk.ui.jni.JniActivityForJava
 import com.stone.study.ndk.util.showLong
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             when (title.substring("$index.".length)) {
                 "jni-java" -> startAct(JniActivityForJava::class.java)
                 "jni" -> startAct(JniActivity::class.java)
+                "text encrypt" -> startAct(EncryptActivity::class.java)
             }
         }
 
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         val TITLES = listOf(
             "jni-java",
             "jni",
+            "text encrypt"
         ).mapIndexed { index, s -> "$index.$s" }
     }
 }

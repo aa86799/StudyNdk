@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ui.jni.JniActivityForJava" />
         <activity android:name=".ui.jni.JniActivity" />
+        <activity android:name=".ui.encrypt.EncryptActivity" />
     </application>
 
 </manifest>
