@@ -7,14 +7,24 @@ cmake_minimum_required(VERSION 3.10.2)
 #   gnustl_static is no longer supported.  Please switch to either c++_shared
 #   or c++_static.  See
 
-# 头文件目录
-include_directories(include, mp3, mp3/libmp3lame)
-# 添加一个库 源码文件列表为空；后面通过 target_sources 链接
-add_library(libmp3lame "")
-# 查找在某个路径下的所有源文件; 并将输出结果列表储存在指定的变量中
-AUX_SOURCE_DIRECTORY(mp3/libmp3lame  lames)
-# 将源码文件变量绑定到 目标库; PRIVATE 表示 这些源只应添加到 目标库libmp3lame；PUBLIC 表示 不但添加到目标库，也添加到其它链接了libmp3lame的库中
-target_sources(libmp3lame PRIVATE ${lames})
+# lame 引入，第一种方式：源码依赖编译
+## 头文件目录
+#include_directories(include, mp3, mp3/libmp3lame)
+## 添加一个库 源码文件列表为空；后面通过 target_sources 链接
+#add_library(libmp3lame "")
+## 查找在某个路径下的所有源文件; 并将输出结果列表储存在指定的变量中
+#AUX_SOURCE_DIRECTORY(mp3/libmp3lame  lames)
+## 将源码文件变量绑定到 目标库; PRIVATE 表示 这些源只应添加到 目标库libmp3lame；PUBLIC 表示 不但添加到目标库，也添加到其它链接了libmp3lame的库中
+#target_sources(libmp3lame PRIVATE ${lames})
+
+# lame 引入，第二种方式：直接使用 lame 的静态库
+# 导入方式：静态
+add_library(libmp3lame STATIC IMPORTED)
+# 设置 libmp3lame 静态库的位置
+set_target_properties(
+        libmp3lame PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/mp3/${ANDROID_ABI}/libmp3lame.a
+)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
