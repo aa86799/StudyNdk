@@ -9,6 +9,7 @@ import com.stone.study.ndk.databinding.ActivityMainBinding
 import com.stone.study.ndk.ui.encrypt.EncryptActivity
 import com.stone.study.ndk.ui.jni.JniActivity
 import com.stone.study.ndk.ui.jni.JniActivityForJava
+import com.stone.study.ndk.ui.mp3.Mp3EncodeActivity
 import com.stone.study.ndk.util.showLong
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 "jni-java" -> startAct(JniActivityForJava::class.java)
                 "jni" -> startAct(JniActivity::class.java)
                 "text encrypt" -> startAct(EncryptActivity::class.java)
+                "mp3 encode" -> startAct(Mp3EncodeActivity::class.java)
             }
         }
 
@@ -47,7 +49,8 @@ class MainActivity : AppCompatActivity() {
         val TITLES = listOf(
             "jni-java",
             "jni",
-            "text encrypt"
+            "text encrypt",
+            "mp3 encode"
         ).mapIndexed { index, s -> "$index.$s" }
     }
 }

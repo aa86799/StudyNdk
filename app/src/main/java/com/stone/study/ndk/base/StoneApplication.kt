@@ -18,7 +18,6 @@ class StoneApplication : MultiDexApplication() {
 
     companion object {
         lateinit var instance: StoneApplication
-        const val DOKIT_PID = "5e73502e25295284cd3a812b95af99a0"
     }
 
     override fun attachBaseContext(base: Context?) {
