@@ -24,6 +24,7 @@
         <activity android:name=".ui.jni.JniActivity" android:exported="false"/>
         <activity android:name=".ui.encrypt.EncryptActivity" android:exported="false"/>
         <activity android:name=".ui.mp3.Mp3EncodeActivity" android:exported="false"/>
+        <activity android:name=".ui.ffmpeg.FFMpegActivity" android:exported="false"/>
     </application>
 
 </manifest>

@@ -22,9 +22,28 @@ cmake_minimum_required(VERSION 3.10.2)
 add_library(libmp3lame STATIC IMPORTED)
 # 设置 libmp3lame 静态库的位置
 set_target_properties(
-        libmp3lame PROPERTIES IMPORTED_LOCATION
-        ${CMAKE_SOURCE_DIR}/mp3/${ANDROID_ABI}/libmp3lame.a
+        libmp3lame PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/mp3/${ANDROID_ABI}/libmp3lame.a
 )
+
+# use ffmpeg 5.0
+include_directories(ffmpeg_50/include)
+# 动态导入
+add_library(avcodec SHARED IMPORTED)
+add_library(avdevice SHARED IMPORTED)
+add_library(libavfilter SHARED IMPORTED)
+add_library(libavformat SHARED IMPORTED)
+add_library(libavutil SHARED IMPORTED)
+add_library(libpostproc SHARED IMPORTED)
+add_library(libswresample SHARED IMPORTED)
+add_library(libswscale SHARED IMPORTED)
+set_target_properties(avcodec PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libavcodec.so)
+set_target_properties(avdevice PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libavdevice.so)
+set_target_properties(libavfilter PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libavfilter.so)
+set_target_properties(libavformat PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libavformat.so)
+set_target_properties(libavutil PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libavutil.so)
+set_target_properties(libpostproc PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libpostproc.so)
+set_target_properties(libswresample PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libswresample.so)
+set_target_properties(libswscale PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/ffmpeg_50/${ANDROID_ABI}/libswscale.so)
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
@@ -43,6 +62,8 @@ add_library( # Sets the name of the library.
         encrypt/Encrypt.cpp
         JniUtil.cpp
         mp3/mp3_encoder.cpp
+#        ffmpeg_50/decode_pcm_yuv.cpp
+        ffmpeg_50/test.cpp
 )
 
 # Searches for a specified prebuilt library and stores the path as a
@@ -65,6 +86,14 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
                        stoneNdk-lib
         libmp3lame
+        avcodec
+        avdevice
+        libavfilter
+        libavformat
+        libavutil
+        libpostproc
+        libswresample
+        libswscale
 
                        # Links the target library to the log library
                        # included in the NDK.

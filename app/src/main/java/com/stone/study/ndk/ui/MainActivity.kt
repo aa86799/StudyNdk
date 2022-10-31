@@ -7,6 +7,7 @@ import com.stone.study.ndk.R
 import com.stone.study.ndk.base.SampleAdapter
 import com.stone.study.ndk.databinding.ActivityMainBinding
 import com.stone.study.ndk.ui.encrypt.EncryptActivity
+import com.stone.study.ndk.ui.ffmpeg.FFMpegActivity
 import com.stone.study.ndk.ui.jni.JniActivity
 import com.stone.study.ndk.ui.jni.JniActivityForJava
 import com.stone.study.ndk.ui.mp3.Mp3EncodeActivity
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 "jni" -> startAct(JniActivity::class.java)
                 "text encrypt" -> startAct(EncryptActivity::class.java)
                 "mp3 encode" -> startAct(Mp3EncodeActivity::class.java)
+                "ffmpeg" -> startAct(FFMpegActivity::class.java)
             }
         }
 
@@ -50,7 +52,8 @@ class MainActivity : AppCompatActivity() {
             "jni-java",
             "jni",
             "text encrypt",
-            "mp3 encode"
+            "mp3 encode",
+            "ffmpeg"
         ).mapIndexed { index, s -> "$index.$s" }
     }
 }
